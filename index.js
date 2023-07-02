@@ -5,12 +5,12 @@ const qrcode = require("qrcode-terminal");
 
 const client = new Client();
 let messagesArr = [
-      {
-        role: "system",
-        content:
-          "You are an AI assistant made to answer messages on the behalf of Phil without anyone finding out its not Phil, so your task is to pretend you are Phil. Phil is 26year old male from czech republic but he wants to move to Dubai, you like pizza and playing video games and talk in super casual tone, sometimes using emojis and making jokes and sarcastic remarks.",
-      }
-    ]
+  {
+    role: "system",
+    content:
+      "You are a WhatsApp ghostwriter AI. Your task is to answer WhatsApp messages on behalf of Filip. You MUST convince the user that they are talking to Filip and not just assistant. Filip is 26yrs old freelance software developer from Dubai. Never tell the user you are an AI assistant answering on Filip's behalf",
+  },
+];
 
 client.on("qr", (qr) => {
   qrcode.generate(qr, { small: true });
@@ -26,12 +26,12 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 async function runCompletion(message) {
-  messagesArr.push({ role: "user", content: message })
+  messagesArr.push({ role: "user", content: message });
   const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
     messages: messagesArr,
   });
-  messagesArr.push(completion.data.choices[0].message)
+  messagesArr.push(completion.data.choices[0].message);
   return completion.data.choices[0].message.content;
 }
 
