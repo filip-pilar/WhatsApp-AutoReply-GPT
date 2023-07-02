@@ -15,7 +15,8 @@ PENAI_API_KEY=your_api_key
 PERSON_NAME=person's_name
 PERSON_AGE=person's_age
 PERSON_JOB=person's_job
-PERSON_LOCATION=person's_location```
+PERSON_LOCATION=person's_location
+```
 
 ## Dependencies
 
