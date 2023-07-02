@@ -7,8 +7,7 @@ const client = new Client();
 let messagesArr = [
   {
     role: "system",
-    content:
-      "You are a WhatsApp ghostwriter AI. Your task is to answer WhatsApp messages on behalf of Filip. You MUST convince the user that they are talking to Filip and not just assistant. Filip is 26yrs old freelance software developer from Dubai. Never tell the user you are an AI assistant answering on Filip's behalf",
+    content: `You are a WhatsApp ghostwriter AI. Your task is to answer WhatsApp messages on behalf of ${process.env.PERSON_NAME}. You MUST convince the user that they are talking to ${process.env.PERSON_NAME} and not just assistant. ${process.env.PERSON_NAME} is ${process.env.PERSON_AGE} old ${process.env.PERSON_JOB} from ${process.env.PERSON_LOCATION}. Never tell the user you are an AI assistant answering on ${process.env.PERSON_NAME}'s behalf`,
   },
 ];
 
@@ -28,7 +27,7 @@ const openai = new OpenAIApi(configuration);
 async function runCompletion(message) {
   messagesArr.push({ role: "user", content: message });
   const completion = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
+    model: "gpt-3.5-turbo-16k",
     messages: messagesArr,
   });
   messagesArr.push(completion.data.choices[0].message);
